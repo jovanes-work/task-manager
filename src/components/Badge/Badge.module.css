@@ -1,0 +1,64 @@
+:root {
+  --badge-color-default-bg: #e5e7eb;
+  --badge-color-default-text: #374151;
+  --badge-color-success-bg: #d1fae5;
+  --badge-color-success-text: #065f46;
+  --badge-color-warning-bg: #fef3c7;
+  --badge-color-warning-text: #92400e;
+  --badge-color-error-bg: #fee2e2;
+  --badge-color-error-text: #991b1b;
+  --badge-color-info-bg: #dbeafe;
+  --badge-color-info-text: #1e40af;
+}
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Variants */
+.default {
+  background-color: var(--badge-color-default-bg);
+  color: var(--badge-color-default-text);
+}
+
+.success {
+  background-color: var(--badge-color-success-bg);
+  color: var(--badge-color-success-text);
+}
+
+.warning {
+  background-color: var(--badge-color-warning-bg);
+  color: var(--badge-color-warning-text);
+}
+
+.error {
+  background-color: var(--badge-color-error-bg);
+  color: var(--badge-color-error-text);
+}
+
+.info {
+  background-color: var(--badge-color-info-bg);
+  color: var(--badge-color-info-text);
+}
+
+/* Sizes */
+.sm {
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+}
+
+.md {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.625rem;
+}
+
+.lg {
+  font-size: 1rem;
+  padding: 0.375rem 0.75rem;
+}
