@@ -1,16 +1,5 @@
 import { apiClient } from '@/lib/apiClient';
-import type { Task } from '@/types';
-
-export interface CreateTaskDto {
-  title: string;
-  description: string;
-}
-
-export interface UpdateTaskDto {
-  title?: string;
-  description?: string;
-  status?: Task['status'];
-}
+import type { Task, CreateTaskDto, UpdateTaskDto } from '@/types/tasks.types';
 
 export const taskService = {
   getAll: (): Promise<Task[]> => apiClient.get('/tasks'),
