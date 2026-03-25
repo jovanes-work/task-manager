@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -c \"\nimport json, sys\nd = json.load(sys.stdin)\np = d.get('tool_input', {}).get('file_path', '')\nblocked = ['.env', '.env.local', '.env.production', 'package-lock.json', '.git/']\nfor b in blocked:\n    if b in p:\n        print(f'BLOQUEADO: {p} es un archivo protegido', file=sys.stderr)\n        sys.exit(2)\n\""
+            "command": "FILE=$(echo $CLAUDE_TOOL_INPUT | jq -r '.tool_input.file_path // empty'); echo \"$FILE\" | grep -qE '(\\.env|\\.env\\.local|\\.env\\.production|package-lock\\.json|\\.git/)' && echo \"🚫 BLOQUEADO: $FILE es un archivo protegido\" >&2 && exit 2; exit 0"
           }
         ]
       },
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "BRANCH=$(git branch --show-current 2>/dev/null); [ \"$BRANCH\" = \"main\" ] && echo 'BLOQUEADO: No se puede editar directamente en main. Creá una rama con: git checkout -b feature/nombre' >&2 && exit 2; exit 0"
+            "command": "BRANCH=$(git branch --show-current 2>/dev/null); [ \"$BRANCH\" = \"main\" ] && echo \"⛔ BLOQUEADO: No se puede editar en main. Corré: git checkout -b feature/nombre\" >&2 && exit 2; exit 0"
           }
         ]
       }
@@ -40,7 +40,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '=== ESTADO DEL REPO ==='; echo 'Rama:' $(git branch --show-current 2>/dev/null); echo ''; echo 'Cambios pendientes:'; git status --short 2>/dev/null; echo ''; echo 'Últimos commits:'; git log --oneline -3 2>/dev/null; echo '====================='"
+            "command": "echo ''; echo '📂 PROYECTO:' $(basename $(pwd)); echo '🌿 RAMA:    ' $(git branch --show-current 2>/dev/null); echo '📝 CAMBIOS: ' $(git status --short 2>/dev/null | wc -l | tr -d ' ') 'archivos'; echo '🕐 ÚLTIMO:  ' $(git log --oneline -1 2>/dev/null); echo ''"
           }
         ]
       }
