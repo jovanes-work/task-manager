@@ -1,0 +1,50 @@
+{
+  "hooks": {
+
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(echo $CLAUDE_TOOL_INPUT | jq -r '.tool_input.file_path // empty'); [ -n \"$FILE\" ] && echo \"$FILE\" | grep -qE '\\.(ts|tsx|js|jsx|css|json)$' && npx prettier --write \"$FILE\" 2>/dev/null; exit 0"
+          }
+        ]
+      }
+    ],
+
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"\nimport json, sys\nd = json.load(sys.stdin)\np = d.get('tool_input', {}).get('file_path', '')\nblocked = ['.env', '.env.local', '.env.production', 'package-lock.json', '.git/']\nfor b in blocked:\n    if b in p:\n        print(f'BLOQUEADO: {p} es un archivo protegido', file=sys.stderr)\n        sys.exit(2)\n\""
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "BRANCH=$(git branch --show-current 2>/dev/null); [ \"$BRANCH\" = \"main\" ] && echo 'BLOQUEADO: No se puede editar directamente en main. Creá una rama con: git checkout -b feature/nombre' >&2 && exit 2; exit 0"
+          }
+        ]
+      }
+    ],
+
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '=== ESTADO DEL REPO ==='; echo 'Rama:' $(git branch --show-current 2>/dev/null); echo ''; echo 'Cambios pendientes:'; git status --short 2>/dev/null; echo ''; echo 'Últimos commits:'; git log --oneline -3 2>/dev/null; echo '====================='"
+          }
+        ]
+      }
+    ]
+
+  }
+}

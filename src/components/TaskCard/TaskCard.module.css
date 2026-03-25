@@ -1,0 +1,115 @@
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* Header */
+.task-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.task-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+/* Badge de status */
+.task-card__badge {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.task-card__badge--pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.task-card__badge--in-progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.task-card__badge--done {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+/* Description */
+.task-card__description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Footer */
+.task-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.task-card__date {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Actions */
+.task-card__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-card__btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.task-card__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.task-card__btn--complete {
+  background-color: #10b981;
+  color: #fff;
+}
+
+.task-card__btn--complete:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.task-card__btn--delete {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.task-card__btn--delete:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
