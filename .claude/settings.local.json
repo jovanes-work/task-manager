@@ -4,7 +4,8 @@
       "Bash(npm install:*)",
       "Bash(npx tsc:*)",
       "Bash(npm test:*)",
-      "Bash(npx prettier:*)"
+      "Bash(npx prettier:*)",
+      "Bash(git:*)"
     ]
   }
 }
