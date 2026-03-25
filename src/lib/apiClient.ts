@@ -10,11 +10,12 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${endpoint}`);
+    const errorBody = await response.text();
+    throw new Error(`HTTP ${response.status}: ${endpoint} — ${errorBody}`);
   }
 
-  if (response.status === 204) return undefined as T;
-  return response.json() as Promise<T>;
+  if (response.status === 204) return undefined as unknown as T; // Safe: solo se alcanza en respuestas void (DELETE)
+  return (await response.json()) as unknown as T; // Safe: el caller es responsable de que T coincida con el contrato del servidor
 }
 
 export const apiClient = {
