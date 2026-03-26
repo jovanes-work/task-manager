@@ -1,9 +1,10 @@
+import type { ReactElement } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { LoginPage } from '@/pages/LoginPage';
 import { TasksPage } from '@/pages/TasksPage';
 
-function App(): React.ReactElement {
+function App(): ReactElement {
   return (
     <BrowserRouter>
       <Routes>

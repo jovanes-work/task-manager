@@ -5,7 +5,8 @@ import { AUTH_ERROR_FALLBACK } from '@/constants/auth.constants';
 import type { LoginCredentialsDto } from '@/types/auth.types';
 
 export function useAuth() {
-  const { user, isAuthenticated, setAuth, logout } = useAuthStore();
+  const { user, setAuth, logout } = useAuthStore();
+  const isAuthenticated = useAuthStore((state) => state.user !== null && state.token !== null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
