@@ -5,7 +5,13 @@
       "Bash(npx tsc:*)",
       "Bash(npm test:*)",
       "Bash(npx prettier:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(gh issue:*)",
+      "Bash(cat /Users/hovhannes/Documents/task-manager/src/styles/*.css)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "github"
+  ]
 }

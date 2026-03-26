@@ -112,3 +112,11 @@ Mostrar tabla con todos los archivos creados:
 | Archivo | Tipo | Descripción |
 |---------|------|-------------|
 | ...     | ...  | ...         |
+
+### 9. Review automático al terminar
+Una vez creados todos los archivos, invocá el agent code-reviewer
+para revisar todo lo generado.
+
+Pasale todos los archivos creados y pedile el reporte completo.
+Si el veredicto es 🔴, mostrá los problemas críticos y preguntá
+si fixearlos antes de terminar.
