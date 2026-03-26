@@ -1,5 +1,8 @@
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
+// Realiza una petición HTTP al backend. Agrega Content-Type: application/json
+// a todos los requests, lanza un Error con el status y cuerpo si la respuesta
+// no es ok, y devuelve undefined en respuestas 204 (sin contenido).
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,
